@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+@import '@heroui/styles';
+
+@theme {
+  --color-accent-1: #9d86ff;
+  --color-accent-2: #7d52fd;
+  --color-accent-dark: #151022;
+  --color-accent-paragraph: #d0cfd3;
+  --color-accent-5: #ffffff;
+  --color-dark-bg: #1e182b;
+}
+
+@layer base {
+  .bricole {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-optical-sizing: auto;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+  .inter {
+    font-family: 'Inter', sans-serif;
+    font-optical-sizing: auto;
+  }
+
+  .jakarta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+  .tab-bg {
+    background: linear-gradient(
+      103.76deg,
+      rgba(255, 255, 255, 0.12) 18.33%,
+      rgba(255, 255, 255, 0.08) 81.67%
+    );
+  }
+
+  .border-grad {
+    border: 1px solid transparent;
+    border-image-source: linear-gradient(
+      96.77deg,
+      rgba(255, 255, 255, 0.08) 0.57%,
+      rgba(153, 153, 153, 0.16) 99.43%
+    );
+  }
+
+  .border-2 {
+    border: 2px solid;
+    border-image-source: linear-gradient(180deg, #171717 0%, #2a2a2a 100%);
+  }
+
+  .stack-section {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    height: 100%;
+    background-color: #fff; /* Mandatory to hide the section underneath */
+    z-index: 1;
+  }
+}
+
+@layer utilities {
+  .text-lg {
+    @apply text-sm md:text-lg leading-[100%];
+  }
+  .text-20 {
+    @apply text-xs md:text-[20px] md:leading-5.5;
+  }
+  .text-64 {
+    @apply text-4xl md:text-[64px] md:leading-18;
+  }
+  .text-18 {
+    @apply text-xs md:text-[18px] md:leading-5.5;
+  }
+
+  .text-24 {
+    @apply text-sm md:text-[24px] md:leading-8;
+  }
+
+  .text-body {
+    @apply text-sm md:text-base md:leading-6;
+  }
+
+  .text-28 {
+    @apply text-sm md:text-[28px] md:leading-8.5;
+  }
+  .text-32 {
+    @apply text-base md:text-[32px] md:leading-10;
+  }
+  .text-40 {
+    @apply text-2xl md:text-[40px] md:leading-12;
+  }
+
+  .flex-col {
+    @apply flex flex-col;
+  }
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}
