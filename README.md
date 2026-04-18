@@ -1,28 +1,70 @@
-useLayoutEffect(() => {
-const sections = gsap.utils.toArray<HTMLElement>('.stack-section');
+# How to Clone and Start the Project
 
-    sections.forEach((section, i) => {
-      // Check if section is taller than the viewport
-      const isTall = section.offsetHeight > window.innerHeight;
+This guide will walk you through the steps to clone this project from a repository and start it on your local machine.
 
-      ScrollTrigger.create({
-        trigger: section,
-        // If tall: start pinning when the BOTTOM of the section hits the BOTTOM of viewport
-        // If short: start pinning when the TOP hits the TOP
-        start: isTall ? 'bottom bottom' : 'top top',
+### Prerequisites
 
-        // It stays pinned until the NEXT section reaches the top
-        // We use a large end value or pin it until the end of the page
-        end: 'max',
+Before you begin, ensure you have the following installed:
 
-        pin: true,
-        pinSpacing: false,
-        invalidateOnRefresh: true,
-      });
-    });
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
 
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
+## Steps to Clone and Start the Project
 
-}, []);
+#### 1. Clone the Repository
+
+1. Open your terminal or command prompt.
+2. Navigate to the directory where you want to clone the project.
+3. Run the following command to clone the repository:
+
+   ```bash
+   git clone https://github.com/Bright-Abel/updated-portfolio.git
+   ```
+
+4. Navigate to the cloned project directory:
+
+   ```bash
+   cd portfolio
+   ```
+
+#### 2. Install Dependencies
+
+1. Ensure you are in the project directory.
+2. Install the project dependencies by running:
+
+   ```bash
+   npm install
+   ```
+
+#### 3. Start the Project
+
+1. Once the dependencies are installed, start the project by running:
+
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and go to the specified URL (e.g., `http://localhost:5173`).
+
+### Troubleshooting
+
+- **Missing Dependencies:** If you encounter missing dependencies, re-run `npm install`.
+- **Unknown Start Command:** Double-check the `scripts` section of the `package.json` file.
+
+### Additional Commands
+
+- **Build the Project:**
+
+  ```bash
+  npm run build
+  ```
+
+- **Install a Specific Dependency:**
+
+  ```bash
+  npm install <package-name>
+  ```
+
+### Conclusion
+
+You have now successfully cloned and started the project!.
