@@ -37,7 +37,7 @@ const App = () => {
     // 4. Your Stacking Animation Logic
     const sections = gsap.utils.toArray<HTMLElement>('.stack-section');
 
-    sections.forEach((section, i) => {
+    sections.forEach((section) => {
       const isTall = section.offsetHeight > window.innerHeight;
 
       ScrollTrigger.create({
