@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Filter from './_component/Filter';
 import PortfolioCard from './_component/PortfolioCard';
+
 import {
   appDesign,
   appDesign2,
@@ -15,6 +16,8 @@ import {
   jewelry,
   fashion,
 } from '../../assets';
+import { useFetchProjects } from '../../custom/FetchData';
+import type { IFetchProject } from '../../custom/interface';
 
 const arr = [
   {
@@ -112,6 +115,36 @@ const portfolioArr = [
 
 const Portfolio = () => {
   const [active, setActive] = useState('all');
+  const { project, isLoading, isError } = useFetchProjects();
+  const [projectFilter, setProjectFilter] = useState<IFetchProject[]>([]);
+
+  const filter = useMemo(() => {
+    if (!projectFilter.length || !projectFilter)
+      return { tagFilter: [], project: [] };
+
+    const tagFilter = projectFilter.map((item) => {
+      return {
+        btnName: item.projectType,
+        btnTag: item.projectType?.toLowerCase(),
+      };
+    });
+
+    const project = projectFilter.map((item) => {
+      return {
+        src: item.image,
+        header: item.title,
+        description: item.productDesign,
+        link: item.projectLink,
+      };
+    });
+
+    return { tagFilter, project };
+  }, [project, projectFilter]);
+
+  useEffect(() => {
+    setProjectFilter(project);
+    // console.log(projectFilter);/
+  }, [project]);
 
   const filterPortfolio = portfolioArr.filter((item) => {
     if (active === 'all') {
@@ -135,9 +168,8 @@ const Portfolio = () => {
             Projects That Reflect My Expertise And Design Approach
           </h2>
           <div className='flex items-center gap-4'>
-            {arr.map((item, index) => (
+            {filter?.tagFilter.map((item, index) => (
               <Filter
-                key={index}
                 active={active === item.btnTag}
                 btnName={item.btnName}
                 btnTag={item.btnTag}
@@ -148,8 +180,8 @@ const Portfolio = () => {
         </div>
 
         <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7.5 '>
-          {filterPortfolio.length > 0 ? (
-            filterPortfolio.map((item, index) => (
+          {filter?.project.length > 0 ? (
+            filter?.project.map((item, index) => (
               <PortfolioCard {...item} key={index} />
             ))
           ) : (
