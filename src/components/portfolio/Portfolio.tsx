@@ -122,16 +122,26 @@ const Portfolio = () => {
     if (!projectFilter.length || !projectFilter)
       return { tagFilter: [], project: [] };
 
-    const tagFilter = projectFilter.map((item) => {
-      return {
-        btnName: item.projectType,
-        btnTag: item.projectType?.toLowerCase(),
-      };
-    });
+    const tagFilter = [
+      ...new Map(
+        projectFilter
+          .filter((item) => item.projectType)
+          .map((item) => {
+            const key = item.projectType.toLowerCase();
+            return [
+              key,
+              {
+                btnName: item.projectType,
+                btnTag: key,
+              },
+            ];
+          })
+      ).values(),
+    ];
 
     const project = projectFilter.map((item) => {
       return {
-        src: item.image,
+        src: item.img,
         header: item.title,
         description: item.productDesign,
         link: item.projectLink,
@@ -146,7 +156,7 @@ const Portfolio = () => {
     // console.log(projectFilter);/
   }, [project]);
 
-  const filterPortfolio = portfolioArr.filter((item) => {
+  const filterPortfolio = filter?.project.filter((item) => {
     if (active === 'all') {
       return true;
     }
@@ -174,14 +184,15 @@ const Portfolio = () => {
                 btnName={item.btnName}
                 btnTag={item.btnTag}
                 setActive={setActive}
+                key={index}
               />
             ))}
           </div>
         </div>
 
-        <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7.5 '>
-          {filter?.project.length > 0 ? (
-            filter?.project.map((item, index) => (
+        <div className='w-full grid grid-cols-1 h-full md:grid-cols-2 lg:grid-cols-3 gap-7.5 '>
+          {filterPortfolio.length > 0 ? (
+            filterPortfolio.map((item, index) => (
               <PortfolioCard {...item} key={index} />
             ))
           ) : (

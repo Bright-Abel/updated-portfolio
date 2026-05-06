@@ -25,10 +25,18 @@ const PortfolioCard = ({
 
       <div className='flex justify-between items-end gap-4 px-6 pb-6'>
         <div className='flex-col gap-2'>
-          <h5 className='uppercase text-accent-1 text-20 font-medium'>
+          <h2
+            title={header}
+            className='text-xl text-white capitalize font-bold line-clamp-1'
+          >
+            {header}
+          </h2>
+          <h5
+            title={description}
+            className='uppercase text-accent-1 text-xs line-clamp-4 font-medium'
+          >
             {description}
           </h5>
-          <h2 className='text-xl text-white capitalize font-bold'>{header}</h2>
         </div>
         <div className='size-12 rounded-full flex-center bg-white shrink-0'>
           <a href={link} target='_blank' className='text-accent-dark text-2xl'>

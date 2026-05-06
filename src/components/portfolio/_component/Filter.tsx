@@ -22,7 +22,7 @@ const Filter = ({ active, btnName, btnTag, setActive }: FilterProps) => {
       aria-label={btnName}
       onClick={() => setActive(btnTag)}
       className={clsx(
-        'py-3 px-5 backdrop-blur-xl rounded-full text-lg text-white font-medium cursor-pointer transition-colors duration-1000',
+        'py-3 px-5 backdrop-blur-xl capitalize line-clamp-1 text-nowrap rounded-full text-lg text-white font-medium cursor-pointer transition-colors duration-1000',
         active && 'bg-white! text-accent-dark!'
       )}
     >

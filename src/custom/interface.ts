@@ -4,7 +4,7 @@ export interface IFetchProject {
   projectLink: string;
   projectType: string;
   title: string;
-  image: Image;
+  img: string;
 }
 
 interface Image {
