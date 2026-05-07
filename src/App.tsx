@@ -8,6 +8,7 @@ import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
+import { createTriggers } from './lib/fuctions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,42 +16,40 @@ const App = () => {
   const containerRef = useRef(null);
 
   useLayoutEffect(() => {
-    // 1. Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // standard expo easing
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
       smoothWheel: true,
     });
 
-    // 2. Hook Lenis into GSAP's RequestAnimationFrame
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
+
     requestAnimationFrame(raf);
 
-    // 3. Tell ScrollTrigger to use Lenis for proxying
     lenis.on('scroll', ScrollTrigger.update);
 
-    // 4. Your Stacking Animation Logic
-    const sections = gsap.utils.toArray<HTMLElement>('.stack-section');
+    createTriggers();
 
-    sections.forEach((section) => {
-      const isTall = section.offsetHeight > window.innerHeight;
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: isTall ? 'bottom bottom' : 'top top',
-        end: 'max',
-        pin: true,
-        pinSpacing: false,
-        invalidateOnRefresh: true,
-      });
+    // VERY IMPORTANT
+    const resizeObserver = new ResizeObserver(() => {
+      createTriggers();
     });
 
+    const portfolio = document.querySelector('#portfolio');
+    const about = document.querySelector('#about');
+
+    if (about) {
+      resizeObserver.observe(about);
+    }
+
+    if (portfolio) {
+      resizeObserver.observe(portfolio);
+    }
+
     return () => {
+      resizeObserver.disconnect();
       lenis.destroy();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
@@ -59,7 +58,7 @@ const App = () => {
   return (
     <main
       ref={containerRef}
-      className='min-h-screen w-full max-w-432 mx-auto bg-accent-dark  overflow-hidden bricole'
+      className='min-h-screen w-full max-w-432 mx-auto bg-accent-dark  overflow-x-hidden bricole'
     >
       <div className='stack-section bg-accent-dark relative z-1'>
         <HeroSection />

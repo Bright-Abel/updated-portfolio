@@ -1,4 +1,5 @@
 import { app, brand, design, desktop, graphic, writer } from '../../assets';
+import MotionWrap from '../../wrapper/MotionWrap';
 import ServiceCard from './_component/ServiceCard';
 
 const serviceArr = [
@@ -53,11 +54,11 @@ const Services = () => {
           <h2 className='text-40 font-bold text-white'>My Specialities</h2>
         </div>
 
-        <div className='flex flex-wrap items-center justify-center gap-7.5'>
+        <MotionWrap className='flex flex-wrap items-center justify-center gap-7.5'>
           {serviceArr.map((item, index) => {
             return <ServiceCard {...item} key={index} />;
           })}
-        </div>
+        </MotionWrap>
       </div>
     </section>
   );
