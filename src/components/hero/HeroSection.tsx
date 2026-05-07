@@ -1,6 +1,7 @@
-import { StarIcon } from '../../lib/SvgIcons';
 import HeroImage from './_comp/HeroImage';
 import Nav from './_comp/Nav';
+import Typewriter from 'typewriter-effect';
+import { motion } from 'framer-motion';
 
 const HeroSection = () => {
   return (
@@ -19,7 +20,11 @@ const HeroSection = () => {
         <Nav />
 
         <div className='w-full flex items-center gap-10 flex-col md:flex-row! overflow-x-hidden xl:overflow-visible'>
-          <div className='max-w-136.75 w-full flex-col gap-5'>
+          <motion.div
+            whileInView={{ x: [-100, 0], opacity: [0, 1] }}
+            transition={{ duration: 1 }}
+            className='max-w-136.75 w-full flex-col gap-5'
+          >
             <div
               style={{
                 background:
@@ -27,19 +32,35 @@ const HeroSection = () => {
               }}
               className='py-2.5 px-4 rounded-[50px] flex items-center gap-2 border-grad backdrop-blur-xl'
             >
-              <StarIcon className='#9D86FF' height={20} width={20} />
-              <p className='text-20 font-semibold text-white'>
-                LET&apos;S BUILD SOMETHING IMPACTFUL
-              </p>
+              {/* <StarIcon className='#9D86FF' height={20} width={20} /> */}
+              <span>👋</span>
+              <h4 className='text-20 font-semibold text-white'>
+                <Typewriter
+                  onInit={(typewriter) => {
+                    typewriter
+                      .typeString("LET'S BUILD SOMETHING IMPACTFUL.")
+                      .start();
+                  }}
+                />
+              </h4>
             </div>
             <h1 className='text-64 fomt-bold text-white'>
-              I’m Emmanuel, a UI/UX Designer Based in Nigeria.
+              <Typewriter
+                onInit={(typewriter) => {
+                  typewriter
+                    .typeString(
+                      'I’m Emmanuel, a UI/UX Designer Based in Nigeria.'
+                    )
+                    .start();
+                }}
+              />
             </h1>
             <p className='text-18 text-accent-paragraph inter'>
               Designing simple, user-focused digital experiences for a global
               audience.
             </p>
-          </div>
+          </motion.div>
+
           <HeroImage />
         </div>
       </div>

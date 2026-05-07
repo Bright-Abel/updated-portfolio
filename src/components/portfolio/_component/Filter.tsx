@@ -1,14 +1,13 @@
 import clsx from 'clsx';
-import type { Dispatch, SetStateAction } from 'react';
 
 interface FilterProps {
   active: boolean;
   btnName: string;
   btnTag: string;
-  setActive: Dispatch<SetStateAction<string>>;
+  handleWorkFilter: (tool: string) => void;
 }
 
-const Filter = ({ active, btnName, btnTag, setActive }: FilterProps) => {
+const Filter = ({ active, btnName, btnTag, handleWorkFilter }: FilterProps) => {
   return (
     <button
       style={{
@@ -20,7 +19,7 @@ const Filter = ({ active, btnName, btnTag, setActive }: FilterProps) => {
       }}
       type='button'
       aria-label={btnName}
-      onClick={() => setActive(btnTag)}
+      onClick={() => handleWorkFilter(btnTag)}
       className={clsx(
         'py-3 px-5 backdrop-blur-xl capitalize line-clamp-1 text-nowrap rounded-full text-lg text-white font-medium cursor-pointer transition-colors duration-1000',
         active && 'bg-white! text-accent-dark!'

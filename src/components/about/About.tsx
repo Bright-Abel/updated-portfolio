@@ -1,4 +1,5 @@
 import { about } from '../../assets';
+import MotionWrap from '../../wrapper/MotionWrap';
 import MarqueeComp from '../MarqueeComp';
 import Count from './_components/Count';
 
@@ -29,13 +30,13 @@ const arrCount = [
 
 const About = () => {
   return (
-    <section id='about' className='bg-dark-bg  relative pb-6 h-full '>
+    <section id='about' className='bg-dark-bg  relative pb-6'>
       <MarqueeComp />
       <div className='size-125 bg-accent-2 blur-[400px] absolute top-10 left-350' />
       <div className='size-125 bg-accent-2 blur-[400px] absolute top-10 right-350' />
 
       {/* About  */}
-      <div className='w-full max-w-285 pt-10 mx-auto h-full z-10 flex flex-col justify-center gap-6'>
+      <MotionWrap className='w-full max-w-285 pt-10 mx-auto h-full z-10 flex flex-col justify-center gap-6'>
         <div className='w-full flex items-center gap-10 flex-col md:flex-row!'>
           {/* iMAGE */}
           <div className='max-w-125 w-full hidden md:block h-140'>
@@ -78,7 +79,7 @@ const About = () => {
             return <Count {...item} key={index} />;
           })}
         </div>
-      </div>
+      </MotionWrap>
     </section>
   );
 };

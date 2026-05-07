@@ -7,6 +7,7 @@ import {
 import { GmailIcon, StarIcon } from '../../../lib/SvgIcons';
 import Logo from '../../Logo';
 import Link from './Link';
+import Typewriter from 'typewriter-effect';
 
 const linksArr = [
   {
@@ -50,7 +51,15 @@ const Footer = () => {
             </p>
           </div>
           <h1 className='font-bold text-white text-64'>
-            Let’s work together to transform your ideas into reality
+            <Typewriter
+              onInit={(typewriter) => {
+                typewriter
+                  .typeString(
+                    'Let’s work together to transform your ideas into reality.'
+                  )
+                  .start();
+              }}
+            />
           </h1>
           <div className='bg-white w-28.75 h-13.5 rounded-[50px] flex items-center justify-center py-4 px-6'>
             <a

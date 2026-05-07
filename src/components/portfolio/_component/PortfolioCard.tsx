@@ -1,4 +1,5 @@
 import { LuArrowUpRight } from 'react-icons/lu';
+import { motion } from 'framer-motion';
 
 interface PortfolioCardProps {
   src: string;
@@ -23,7 +24,7 @@ const PortfolioCard = ({
         />
       </div>
 
-      <div className='flex justify-between items-end gap-4 px-6 pb-6'>
+      <div className='flex justify-between items-end gap-2 px-6 pb-6'>
         <div className='flex-col gap-2'>
           <h2
             title={header}
@@ -38,11 +39,18 @@ const PortfolioCard = ({
             {description}
           </h5>
         </div>
-        <div className='size-12 rounded-full flex-center bg-white shrink-0'>
+        <motion.div
+          whileInView={{ scale: [0, 1] }}
+          whileHover={{ scale: [1, 0.9] }}
+          transition={{
+            duration: 0.5,
+          }}
+          className='size-12 rounded-full flex-center bg-white shrink-0'
+        >
           <a href={link} target='_blank' className='text-accent-dark text-2xl'>
             <LuArrowUpRight />
           </a>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

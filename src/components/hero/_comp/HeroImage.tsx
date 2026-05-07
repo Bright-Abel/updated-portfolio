@@ -1,4 +1,5 @@
 import { person, figma, ppt, xd, excel, word, framer } from '../../../assets';
+import { motion, easeInOut } from 'framer-motion';
 
 const icons = [
   { src: figma, className: 'top-10 left-4 rotate-35' },
@@ -10,18 +11,36 @@ const icons = [
 ];
 
 const HeroImage = () => {
+  const scaleVariants = {
+    whileInView: {
+      scale: [0, 1],
+      opacity: [0, 1],
+      transition: {
+        duration: 1.5,
+        ease: easeInOut,
+      },
+    },
+  };
   return (
     <div className='w-full relative'>
-      <div className='relative z-10 rounded-[40px] p-4 flex items-center justify-center'>
-        <img
+      <motion.div
+        whileInView={{ opacity: [0, 1] }}
+        transition={{ duration: 1, delayChildren: 1 }}
+        className='relative z-10 rounded-[40px] p-4 flex items-center justify-center'
+      >
+        <motion.img
+          whileInView={{ scale: [0, 1] }}
+          transition={{ duration: 2.5, ease: 'easeInOut' }}
           src={person}
           alt='profile'
           className='w-full h-full object-cover rounded-[30px]'
         />
-      </div>
+      </motion.div>
 
       {icons.map((icon, i) => (
-        <div
+        <motion.div
+          variants={scaleVariants}
+          whileInView={scaleVariants.whileInView}
           className={`size-30 ${icon.className} absolute z-0 flex-center `}
           key={i}
         >
@@ -92,7 +111,7 @@ const HeroImage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
