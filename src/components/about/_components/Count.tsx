@@ -1,6 +1,5 @@
 import ReactCountUp from 'react-countup';
 
-// Safely unwrap the default export to prevent ESM/CJS interop issues in Vite
 const CountUp = (ReactCountUp as any).default || ReactCountUp;
 
 interface Props {
